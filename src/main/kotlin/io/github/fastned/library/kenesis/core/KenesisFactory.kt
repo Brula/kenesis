@@ -76,7 +76,13 @@ object KenesisFactory {
                     .filter { parameter ->
                         shouldGenerateConstructorParameter(parameter, useDefaultValues, customParams)
                     }
-                    .associateWith(generateConstructorParameter(customParams, generateNullables))
+                    .associateWith(
+                        generateConstructorParameter(
+                            customParams,
+                            generateNullables,
+                            useDefaultValues,
+                        )
+                    )
 
                 return primaryConstructor.callBy(constructorArguments) as T
             }
@@ -100,11 +106,15 @@ object KenesisFactory {
     private fun <T> generateConstructorParameter(
         customParams: Map<KProperty1<T, *>, Any?>,
         generateNullables: Boolean,
+        useDefaultValues: Boolean,
     ): (KParameter) -> Any? = { parameter ->
         if (customParams.keys.any { customParam -> customParam.name == parameter.name }) {
             customParams.entries.first { it.key.name == parameter.name }.value
         } else {
-            parameter.type.randomValue(generateNulls = generateNullables)
+            parameter.type.randomValue(
+                generateNulls = generateNullables,
+                useDefaultValues = useDefaultValues,
+            )
         }
     }
 
@@ -114,7 +124,10 @@ object KenesisFactory {
         }
     }
 
-    private fun KType.randomValue(generateNulls: Boolean = false): Any? {
+    private fun KType.randomValue(
+        generateNulls: Boolean = false,
+        useDefaultValues: Boolean = true,
+    ): Any? {
         val nonNullableType = withNullability(false)
 
         return when {
@@ -153,6 +166,7 @@ object KenesisFactory {
                 instance(
                     targetClass = classifier as KClass<*>,
                     generateNullables = generateNulls,
+                    useDefaultValues = useDefaultValues,
                 )
             }
 

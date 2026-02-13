@@ -119,7 +119,7 @@ mavenPublishing {
 
 	signAllPublications()
 
-	coordinates(group.toString(), "fibonacci", version.toString())
+	coordinates(group.toString(), "kenesis", version.toString())
 
 	pom {
 		name = "Kenesis"

@@ -26,3 +26,5 @@ build/
 !**/src/test/**/build/
 
 \.mvn/wrapper/maven-wrapper\.jar
+key.gpg
+secring.gpg

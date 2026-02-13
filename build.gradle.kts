@@ -114,16 +114,39 @@ release {
 	}
 }
 
-publishing {
-	repositories {
-        maven {
-            name = project.name
-        }
-	}
-	publications {
-		create<MavenPublication>(project.name) {
-			artifactId = project.name
-			from(project.components["java"])
+mavenPublishing {
+	publishToMavenCentral()
+
+	signAllPublications()
+
+	coordinates(group.toString(), "fibonacci", version.toString())
+
+	pom {
+		name = "Kenesis"
+		description = "Test library to provide mocked values to use in different tests."
+		inceptionYear = "2025"
+		url = "https://github.com/Fastned/kenesis"
+		licenses {
+			license {
+				name = "The Apache License, Version 2.0"
+				url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+				distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+			}
+		}
+		developers {
+			developer {
+				id = "kotlin-fastned"
+				name = "Fastned"
+				url = "https://github.com/Fastned"
+				email = "dev@fastned.nl"
+				organization = "Fastned"
+				organizationUrl = "https://fastned.nl"
+			}
+		}
+		scm {
+			url = "https://github.com/Fastned/kenesis"
+			connection = "scm:git:git://github.com/Fastned/kenesis"
+			developerConnection = "scm:git:ssh://git@github.com/Fastned/kenesis.git"
 		}
 	}
 }

@@ -1,4 +1,4 @@
-name: Version Bump
+name: version_bump
 on:
   workflow_run:
     workflows:

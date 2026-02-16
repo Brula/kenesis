@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
-class NullableGeneratorTest {
+class NullableDefaultValuesTest {
     @Test
     fun `Should not generate nullable parameters by default`() {
-        val generated = kenesis<ClassWithNullables>()
+        val generated = kenesis<ClassWithNullables>(
+            useDefaultValues = false,
+        )
         assertNull(generated.string)
         assertNull(generated.int)
         assertNull(generated.list)
@@ -15,7 +17,10 @@ class NullableGeneratorTest {
 
     @Test
     fun `Should generate nullable parameters if specified`() {
-        val generated = kenesis<ClassWithNullables>(generateNullables = true)
+        val generated = kenesis<ClassWithNullables>(
+            generateNullables = true,
+            useDefaultValues = false,
+        )
         assertNotNull(generated.string)
         assertNotNull(generated.int)
         assertNotNull(generated.list)
@@ -23,7 +28,10 @@ class NullableGeneratorTest {
 
     @Test
     fun `Should generate nullable parameters also for subclasses`() {
-        val generated = kenesis<ClassWithNullables>(generateNullables = true)
+        val generated = kenesis<ClassWithNullables>(
+            generateNullables = true,
+            useDefaultValues = false,
+        )
         assertNotNull(generated.subclass)
         assertNotNull(generated.subclass.subString)
         assertNotNull(generated.subclass.subInt)
@@ -31,15 +39,15 @@ class NullableGeneratorTest {
     }
 
     data class ClassWithNullables(
-        val string: String?,
-        val int: Int?,
-        val list: List<String>?,
-        val subclass: SubclassWithNullables?,
+        val string: String? = null,
+        val int: Int? = null,
+        val list: List<String>? = null,
+        val subclass: SubclassWithNullables? = null,
     )
 
     data class SubclassWithNullables(
-        val subString: String?,
-        val subInt: Int?,
-        val subList: List<String>?,
+        val subString: String? = null,
+        val subInt: Int? = null,
+        val subList: List<String>? = null,
     )
 }

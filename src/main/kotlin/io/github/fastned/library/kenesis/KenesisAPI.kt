@@ -4,7 +4,7 @@ import io.github.fastned.library.kenesis.core.KenesisFactory
 import kotlin.reflect.KProperty1
 
 inline fun <reified T : Any> kenesis(
-    generateNullables: Boolean = false,
+    generateNullables: Boolean = true,
     useDefaultValues: Boolean = true,
     customParameters: Map<KProperty1<T, *>, Any?> = emptyMap(),
 ) = KenesisFactory.instance(

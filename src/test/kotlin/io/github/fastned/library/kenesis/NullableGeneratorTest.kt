@@ -6,19 +6,19 @@ import kotlin.test.assertNull
 
 class NullableGeneratorTest {
     @Test
-    fun `Should not generate nullable parameters by default`() {
+    fun `Should generate nullable parameters by default`() {
         val generated = kenesis<ClassWithNullables>()
-        assertNull(generated.string)
-        assertNull(generated.int)
-        assertNull(generated.list)
-    }
-
-    @Test
-    fun `Should generate nullable parameters if specified`() {
-        val generated = kenesis<ClassWithNullables>(generateNullables = true)
         assertNotNull(generated.string)
         assertNotNull(generated.int)
         assertNotNull(generated.list)
+    }
+
+    @Test
+    fun `Should not generate nullable parameters if specified`() {
+        val generated = kenesis<ClassWithNullables>(generateNullables = false)
+        assertNull(generated.string)
+        assertNull(generated.int)
+        assertNull(generated.list)
     }
 
     @Test

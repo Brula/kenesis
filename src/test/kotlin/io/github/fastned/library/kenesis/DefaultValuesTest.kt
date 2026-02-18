@@ -1,8 +1,10 @@
 package io.github.fastned.library.kenesis
 
 import org.junit.jupiter.api.Test
+import kotlin.test.DefaultAsserter.assertNotNull
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 class DefaultValuesTest {
@@ -24,11 +26,11 @@ class DefaultValuesTest {
         val instance = kenesis<ClassWithDefaultValues>(useDefaultValues = false)
         assertNotEquals(actual = instance.string, illegal = "My value")
 
-        assertNull(instance.nullableString)
+        assertNotNull(instance.nullableString)
 
         assertNotEquals(actual = instance.int, illegal = 42)
 
-        assertNull(instance.nullableInt)
+        assertNotNull(instance.nullableInt)
     }
 
     data class ClassWithDefaultValues(

@@ -10,20 +10,20 @@ class NullableDefaultValuesTest {
         val generated = kenesis<ClassWithNullables>(
             useDefaultValues = false,
         )
-        assertNull(generated.string)
-        assertNull(generated.int)
-        assertNull(generated.list)
+        assertNotNull(generated.string)
+        assertNotNull(generated.int)
+        assertNotNull(generated.list)
     }
 
     @Test
     fun `Should generate nullable parameters if specified`() {
         val generated = kenesis<ClassWithNullables>(
-            generateNullables = true,
+            generateNullables = false,
             useDefaultValues = false,
         )
-        assertNotNull(generated.string)
-        assertNotNull(generated.int)
-        assertNotNull(generated.list)
+        assertNull(generated.string)
+        assertNull(generated.int)
+        assertNull(generated.list)
     }
 
     @Test
